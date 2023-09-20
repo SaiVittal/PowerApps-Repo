@@ -1,0 +1,359 @@
+"'App Bar' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 1)
+    GalleryItems: |-
+        =Table(
+            {
+                Title: "Property 1",
+                Id: 1,
+                ParentTab: "Home",
+                SubmenuVisible:false
+            },
+            {
+                Title: "Property 2",
+                Id: 1,
+                ParentTab: "Home",
+                SubmenuVisible:false
+            },
+            {
+                Title: "Property 3",
+                Id: 1,
+                ParentTab: "Home",
+                SubmenuVisible:false
+            },
+            {
+                Title: "Owner 1",
+                Id: 2,
+                ParentTab: "Products",
+                SubmenuVisible:true
+            },
+            {
+                Title: "Owner 2",
+                Id: 2,
+                ParentTab: "Products",
+                SubmenuVisible:true
+            },
+            {
+                Title: "Sales 1",
+                Id: 3,
+                ParentTab: "Services",
+                SubmenuVisible:true
+            },
+            {
+                Title: "Sales 2",
+                Id: 3,
+                ParentTab: "Services",
+                SubmenuVisible:true
+            }
+        )
+    Height: =App.DesignHeight/9
+    SubItems: |-
+        =Table(
+            {
+                SubmenuItemID: 1,
+                MenuRef: 2,
+                SubmenuItemLabel: "subItem1",
+                Screen: App.ActiveScreen
+            },
+            {
+                SubmenuItemID: 2,
+                MenuRef: 2,
+                SubmenuItemLabel: "subItem4",
+                Screen: App.ActiveScreen
+            },
+            {
+                SubmenuItemID: 3,
+                MenuRef: 3,
+                SubmenuItemLabel: "subItem2",
+                Screen: App.ActiveScreen
+            },
+            {
+                SubmenuItemID: 4,
+                MenuRef: 3,
+                SubmenuItemLabel: "subItem3",
+                Screen: App.ActiveScreen
+            }
+        )
+    TopMenuItems: |-
+        =Table(
+            {
+                ItemLabel: "Home",
+                SubmenuVisible: false,
+                ItemID: 1,
+                Screen: App.ActiveScreen
+            },
+            {
+                ItemLabel: "Products",
+                SubmenuVisible: true,
+                ItemID: 2,
+                Screen: App.ActiveScreen
+            },
+            {
+                ItemLabel: "Services",
+                SubmenuVisible: true,
+                ItemID: 3,
+                Screen: App.ActiveScreen
+            }
+        )
+    Width: =App.DesignWidth/1.23
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    ScreenContainer As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        X: =Parent.X
+        Y: =Parent.Y
+        ZIndex: =2
+
+        iconContainer As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.Start
+            DropShadow: =DropShadow.None
+            FillPortions: =0
+            Height: =Parent.Height
+            LayoutGap: =23
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: = Parent .Width/20
+            ZIndex: =1
+
+            Image3 As image:
+                Height: =Parent.Height
+                Image: ='contoso_random_img-removebg-preview'
+                Width: =Parent.Width
+                ZIndex: =2
+
+        "'Label Container' As groupContainer.horizontalAutoLayoutContainer":
+            DropShadow: =DropShadow.None
+            FillPortions: =0
+            Height: =iconContainer.Height
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =70
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/2.5
+            ZIndex: =2
+
+            "'Menu items' As gallery.galleryHorizontal":
+                DelayItemLoading: =true
+                FillPortions: =0
+                Height: =Parent.Height
+                Items: ='App Bar'.TopMenuItems
+                LayoutMinHeight: =10
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                ShowScrollbar: =false
+                TemplateSize: =Parent.Width/4
+                Width: =Parent.Width
+                ZIndex: =1
+
+                Label5 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =Parent.TemplateHeight
+                    OnSelect: |-
+                        =Set(
+                            selMenuItem,
+                            ThisItem.ItemID
+                        );
+                        If(
+                            ThisItem.SubmenuVisible = false,
+                            Set(
+                                ExpandSubMenu,
+                                ThisItem.SubmenuVisible
+                            );
+                            Set(
+                                selMenuItem,
+                                -1
+                            )
+                        )
+                    Size: =14
+                    Text: =ThisItem.ItemLabel
+                    Width: =Parent.Width/5
+                    X: =Parent.X
+                    Y: =Parent.Y
+                    ZIndex: =1
+
+                Icon3 As icon.ChevronDown:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =Parent.TemplateHeight
+                    Icon: =Icon.ChevronDown
+                    OnSelect: =
+                    PaddingBottom: =8
+                    PaddingLeft: =8
+                    PaddingRight: =8
+                    PaddingTop: =8
+                    Width: =30
+                    X: =Parent.TemplateWidth-Icon3.Width
+                    Y: =Label5.Y
+                    ZIndex: =2
+
+                "'Submenu items' As gallery.'BrowseLayout_Flexible_NewsFeed_ver5.0'":
+                    DelayItemLoading: =true
+                    Fill: =RGBA(0, 0, 0, 1)
+                    Height: =
+                    Items: ='App Bar'.SubItems
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    ShowScrollbar: =false
+                    TemplatePadding: =0
+                    TemplateSize: =Parent.Width/4
+                    Width: ='Menu items'.Width
+                    Y: =Label5.Height
+                    ZIndex: =3
+
+                    Title2 As label:
+                        Color: =RGBA(255, 255, 255, 1)
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Parent.TemplateHeight
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.SubmenuItemLabel
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width/5
+                        X: =Parent.X
+                        Y: =Parent.Y
+                        ZIndex: =1
+
+                Button4 As button:
+                    Height: =Label5.Height
+                    OnSelect: |-
+                        =Set(
+                            ExpandSubMenu,
+                            !ExpandSubMenu
+                        );
+                        Set(
+                            selMenuItem,ThisItem.ItemID);Set(varMenuText,ThisItem.ItemLabel);
+                        If(
+                            ThisItem.SubmenuVisible= false,
+                            Set(
+                                ExpandSubMenu,
+                                ThisItem.SubmenuVisible
+                            );
+                            Set(
+                                selMenuItem,
+                                -1
+                            )
+                        );
+                        //Navigate(ThisItem.)
+                    Text: ="Button"
+                    Visible: =false
+                    Width: =Label5.Width
+                    X: =Label5.X
+                    Y: =Label5.Y
+                    ZIndex: =4
+
+        "'Search Bar container' As groupContainer.horizontalAutoLayoutContainer":
+            DropShadow: =DropShadow.None
+            FillPortions: =0
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =10
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =70
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width/5
+            ZIndex: =3
+
+            "SearchBox2 As 'Fluent SearchBox (1.0.22) Preview'":
+                DisableAnimation: =false
+                DisplayMode: =DisplayMode.Edit
+                Height: =25 
+                LayoutMinHeight: =200
+                LayoutMinWidth: =200
+                Underlined: =false
+                Width: =Parent.Width
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+        "'button Container' As groupContainer.horizontalAutoLayoutContainer":
+            DropShadow: =DropShadow.None
+            FillPortions: =0
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutGap: =20
+            LayoutMinHeight: =70
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingTop: =10
+            Width: =Parent.Width/3.75
+            ZIndex: =4
+
+            Button2 As button:
+                Fill: =RGBA(0, 0, 0, 0)
+                Font: =Font.'Segoe UI'
+                Height: =Parent.Height/2
+                HoverFill: =Color.Green
+                PressedFill: =
+                Size: =14
+                Text: ="Login"
+                Width: =Parent.Width/3
+                X: =10
+                ZIndex: =1
+
+            Button3 As button:
+                BorderThickness: =0
+                Color: =RGBA(0, 0, 0, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                Font: =Font.'Segoe UI'
+                Height: =Parent.Height/2
+                HoverColor: =RGBA(0, 0, 0, 1)
+                HoverFill: =
+                PressedBorderColor: =
+                Size: =14
+                Text: ="Sign up"
+                Width: =Parent.Width/3
+                ZIndex: =2
+
+        "'Avatar Container' As groupContainer.verticalAutoLayoutContainer":
+            BorderColor: =//Color.White
+            BorderThickness: =1
+            FillPortions: =0
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =70
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =15
+            PaddingLeft: =15
+            PaddingRight: =15
+            PaddingTop: =16
+            RadiusBottomLeft: ='Avatar Container'.Width
+            RadiusBottomRight: ='Avatar Container'.Width
+            RadiusTopLeft: ='Avatar Container'.Width
+            RadiusTopRight: ='Avatar Container'.Width
+            Width: =ScreenContainer.Width-(iconContainer.Width+'Label Container'.Width+'Search Bar container'.Width+'button Container'.Width)
+            ZIndex: =5
+
+            Image2 As image:
+                Height: =Image2.Width
+                Image: =User().Image
+                RadiusBottomLeft: =50
+                RadiusBottomRight: =50
+                RadiusTopLeft: =50
+                RadiusTopRight: =50
+                Width: =Parent.Width/2
+                ZIndex: =1
+
+            Icon5 As icon.Hamburger:
+                Color: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Icon: =Icon.Hamburger
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                Width: =Parent.Width/2
+                ZIndex: =2
+

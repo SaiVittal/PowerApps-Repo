@@ -1,0 +1,37 @@
+Tabs As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =App.DesignHeight/7
+    Width: =800
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    "'Tabs Gallery' As gallery.galleryHorizontal":
+        DelayItemLoading: =true
+        Height: =Parent.Height
+        Items: |-
+            =Table({TabLabel: "Home"},{TabLabel: "Contact"},{TabLabel: "Support"},{TabLabel: "Sign out"})
+        LoadingSpinner: =LoadingSpinner.Data
+        ShowScrollbar: =false
+        TemplateSize: =Parent.Width/4
+        Transition: =Transition.Pop
+        Width: =Parent.Width
+        ZIndex: =1
+
+        Button1 As button:
+            Color: =RGBA(136, 160, 209, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =Parent.Height/2
+            HoverFill: =Color.LightGray
+            OnSelect: =Select(Parent)
+            PaddingTop: =10
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =ThisItem.TabLabel
+            Width: =Parent.TemplateWidth
+            X: =Parent.X
+            Y: =Parent.TemplateHeight/4
+            ZIndex: =1
+

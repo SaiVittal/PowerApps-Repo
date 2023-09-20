@@ -1,0 +1,11 @@
+Screen2 As screen:
+
+    "'App Bar_1' As 'App Bar'":
+        Height: =107
+        Width: =1366
+
+    "'Navigation Component_1' As 'Navigation Component'":
+        Width: ='Navigation Component_1'.MenuWidth
+        Y: =107
+        ZIndex: =2
+
